@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="keysms_config_form">
+            <field name="name">keysms_config_form</field>
+            <field name="model">keysms.configuration</field>
+            <field name="arch" type="xml">
+                <form string="KeySMS Configuration">
+                    <field name="apikey" />
+                    <field name="userid"/>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_keysms_config">
+            <field name="name">KeySMS Configuration</field>
+            <field name="res_model">keysms.configuration</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="keysms_config_form" />
+        </record>
+
+        <menuitem name="KeySMS" id="menu_keysms_administration_server" parent="base.menu_config" action="action_keysms_config"/>
+
+        </data>
+    </openerp>
