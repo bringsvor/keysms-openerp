@@ -5,21 +5,66 @@
             <field name="name">keysms_config_form</field>
             <field name="model">keysms.configuration</field>
             <field name="arch" type="xml">
-                <form string="KeySMS Configuration">
-                    <field name="apikey" />
-                    <field name="userid"/>
+
+                <form string="Configure KeySMS" version="7.0" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <separator string="KeySMS Configuration"/>
+                   <group>
+                       <div>
+                           <field name="apikey" class="oe_inline" />
+                        <label for="apikey" />
+                    <field name="userid" class="oe_inline"/>
+                           <label for="userid" />
+                       </div>
+                   </group>
+                </form>
             </field>
         </record>
 
+
+<record model="ir.actions.act_window" id="action_keysms_templates">
+    <field name="name">Templayes</field>
+    <field name="res_model">keysms.template</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p>Shows the list of SMS templates.</p>
+    </field>
+</record>
+
+
+<record model="ir.ui.view" id="keysms_template_tree_view">
+    <field name="name">Template View</field>
+    <field name="model">keysms.template</field>
+    <field name="type">tree</field>
+    <field name="arch" type="xml">
+        <tree string="Templates">
+        <field name="name" />
+        <field name="body" />
+        </tree>
+    </field>
+</record>
+
+
+
+
         <record model="ir.actions.act_window" id="action_keysms_config">
             <field name="name">KeySMS Configuration</field>
+            <field name="type">ir.actions.act_window</field>
             <field name="res_model">keysms.configuration</field>
-            <field name="view_type">form</field>
+            <!-- <field name="view_type">form</field> -->
             <field name="view_mode">form</field>
-            <field name="view_id" ref="keysms_config_form" />
+            <field name="target">inline</field>
+            <!-- <field name="view_id" ref="keysms_config_form" /> -->
         </record>
+        <menuitem name="KeySMS" id="menu_keysms_administration_server" parent="base.menu_config" />
+        <menuitem name="Configuration" id="menu_keysms_config" parent="menu_keysms_administration_server" action="action_keysms_config"/>
+        <menuitem name="Templates" id="menu_keysms_templates" parent="menu_keysms_administration_server" action="action_keysms_templates"/>
 
-        <menuitem name="KeySMS" id="menu_keysms_administration_server" parent="base.menu_config" action="action_keysms_config"/>
 
         </data>
     </openerp>

@@ -1,5 +1,3 @@
-__author__ = 'Torvald Baade Bringsvor <bringsvor@bringsvor.com>'
-
 
 {
     "name": "KeySMS Client",
@@ -20,12 +18,12 @@ This OpenERP module borows heavily from smsclient.
 #        "security/groups.xml",
 #        "security/ir.model.access.csv",
         "keysms_view.xml",
-        "serveraction_view.xml",
+###        "serveraction_view.xml",
 #        "smsclient_wizard.xml",
 #        "smsclient_data.xml",
 #        "wizard/mass_sms_view.xml",
-        "partner_sms_send_view.xml",
+###        "partner_sms_send_view.xml",
     ],
-    "active": False,
+    "active": True,
     "installable": True,
 }
