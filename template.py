@@ -1,3 +1,5 @@
+from KeySMS import KeySMS
+
 __author__ = 'tbri'
 
 from openerp.osv import osv, fields
@@ -60,11 +62,18 @@ class sms_template(osv.osv):
         'body': fields.text('Body', translate=True, help="Text version of the message (placeholders may be used here)"),
         }
 
-    def render(self, cr, uid, template, model, res_id, context=None):
+    def render(self, cr, uid, template_id, model, res_id, context=None):
+        template = self.browse(cr, uid, template_id, context)
         template_str = tools.ustr(template.body)
         record = None
         if res_id:
-            record = self.pool.get(model).browse(cr, uid, res_id, context=context)
+            proxy = self.pool.get(model)
+            if not proxy:
+                _logger.error("Can't find model: %s", model)
+            else:
+                #record = proxy.browse(cr, uid, res_id, context=context)
+                record = res_id
+
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
 
         variables = {
@@ -77,3 +86,25 @@ class sms_template(osv.osv):
         result = mako_template_env.from_string(template_str).render(variables)
         print "RESULT RENDER", result
         return result
+
+
+    def get_paths(self, cr, uid, keysms):
+        proxy = self.pool.get('ir.config_parameter')
+        apikey = proxy.get_param(cr, uid, 'keysms_apikey')
+        userid = proxy.get_param(cr, uid, 'keysms_userid')
+        print "APIKEY", apikey, userid
+        keysms.auth(userid, apikey)
+
+
+    def send_sms(self, cr, uid, message, receivers, context = None):
+        # Find config
+        config_ids = self.search(cr, uid,  [], context=context)
+
+        assert len(config_ids) == 1
+        for cfg in self.browse(cr, uid, config_ids, context = context):
+            keySms = KeySMS()
+            self.get_paths(cr, uid, keySms)
+            #keySms.auth(cfg.userId, cfg.apiKey)
+            response = keySms.sms(message, receivers)
+            if not response['ok']:
+                raise Exception('Error while sending SMS to %s : %s' % (repr(receivers), repr(response)))

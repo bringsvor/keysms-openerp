@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    <record model="ir.config_parameter" id="keysms_userid">
+        <field name="key">keysms_userid</field>
+            <field name="name">keysms_userid</field>
+        <field name="value">00000000</field>
+        </record>
+
+    <record model="ir.config_parameter" id="keysms_apikey">
+        <field name="key">keysms_apikey</field>
+            <field name="name">keysms_apikey</field>
+        <field name="value">abcdefgh</field>
+        </record>
+
+        </data>
+    </openerp>

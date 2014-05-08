@@ -23,6 +23,7 @@ This OpenERP module borows heavily from smsclient.
 #        "smsclient_data.xml",
 #        "wizard/mass_sms_view.xml",
 ###        "partner_sms_send_view.xml",
+        'parameters.xml',
     ],
     "active": True,
     "installable": True,
