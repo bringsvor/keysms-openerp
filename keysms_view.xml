@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+        <!--
         <record model="ir.ui.view" id="keysms_config_form">
             <field name="name">keysms_config_form</field>
             <field name="model">keysms.configuration</field>
@@ -25,7 +26,7 @@
             </field>
         </record>
 
-
+-->
 <record model="ir.actions.act_window" id="action_keysms_templates">
     <field name="name">Templayes</field>
     <field name="res_model">keysms.template</field>
@@ -51,18 +52,18 @@
 
 
 
-
+<!--
         <record model="ir.actions.act_window" id="action_keysms_config">
             <field name="name">KeySMS Configuration</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">keysms.configuration</field>
+            <field name="res_model">keysms.configuration</field> -->
             <!-- <field name="view_type">form</field> -->
-            <field name="view_mode">form</field>
-            <field name="target">inline</field>
+<!--             <field name="view_mode">form</field>
+            <field name="target">inline</field> -->
             <!-- <field name="view_id" ref="keysms_config_form" /> -->
-        </record>
+<!--        </record> -->
         <menuitem name="KeySMS" id="menu_keysms_administration_server" parent="base.menu_config" />
-        <menuitem name="Configuration" id="menu_keysms_config" parent="menu_keysms_administration_server" action="action_keysms_config"/>
+        <!-- <menuitem name="Configuration" id="menu_keysms_config" parent="menu_keysms_administration_server" action="action_keysms_config"/> -->
         <menuitem name="Templates" id="menu_keysms_templates" parent="menu_keysms_administration_server" action="action_keysms_templates"/>
 
 
